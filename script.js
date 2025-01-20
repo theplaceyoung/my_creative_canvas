@@ -3,7 +3,7 @@ window.onload = function() {
     setTimeout(() => {
         document.getElementById('loadingScreen').style.display = 'none'; // 로딩 화면 숨김
         document.getElementById('mainContent').style.display = 'block';  // 실제 콘텐츠 표시
-    }, 1000);  // 1초 후 로딩 화면 제거
+    }, 1200);  // 1초 후 로딩 화면 제거
 };
 
 const canvas = document.getElementById('drawingCanvas');
