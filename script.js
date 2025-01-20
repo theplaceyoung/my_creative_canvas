@@ -1,80 +1,68 @@
-const canvas = document.createElement('canvas');
+const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
-document.body.insertBefore(canvas, document.querySelector('script'));
 
-// Set canvas size
-canvas.width = window.innerWidth * 0.8;
-canvas.height = window.innerHeight * 0.8;
-
-let isDrawing = false;
+let painting = false;
 let currentColor = 'black';
+let isEraserActive = false;
 
-canvas.addEventListener('mousedown', startDrawing);
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mouseup', stopDrawing);
-canvas.addEventListener('mouseleave', stopDrawing);
-
-function startDrawing(event) {
-    isDrawing = true;
-    ctx.beginPath();
-    ctx.moveTo(event.offsetX, event.offsetY);
-}
-
-function draw(event) {
-    if (!isDrawing) return;
-    ctx.lineTo(event.offsetX, event.offsetY);
-    ctx.strokeStyle = currentColor;
-    ctx.lineWidth = 2;
-    ctx.stroke();
-}
-
-function stopDrawing() {
-    isDrawing = false;
-    ctx.closePath();
-}
-
-// Add buttons for tools
-const toolsDiv = document.createElement('div');
-toolsDiv.className = 'tools';
-
-['Black', 'Red', 'Blue'].forEach(color => {
-    const button = document.createElement('button');
-    button.textContent = color;
-    button.addEventListener('click', () => (currentColor = color.toLowerCase()));
-    toolsDiv.appendChild(button);
+// 각 버튼 클릭 이벤트 리스너
+document.getElementById('black').addEventListener('click', () => {
+    isEraserActive = false;
+    currentColor = 'black';
 });
 
-const clearButton = document.createElement('button');
-clearButton.textContent = 'Clear';
-clearButton.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
-toolsDiv.appendChild(clearButton);
+document.getElementById('red').addEventListener('click', () => {
+    currentColor = 'red';
+});
 
-document.body.insertBefore(toolsDiv, canvas);
+document.getElementById('blue').addEventListener('click', () => {
+    currentColor = 'blue';
+});
 
+document.getElementById('yellow').addEventListener('click', () => {
+    currentColor = 'yellow';
+});
 
-// Flutter로부터 메세지 받기
-function saveCanvas() {
-    console.log('Save canvas triggered by Flutter');
-    const canvas = document.getElementById('myCanvas');
-    if (canvas) {
-        const dataURL = canvas.toDataURL('image/png');
-        console.log('Canvas Data URL:', dataURL);
+document.getElementById('eraser').addEventListener('click', () => {
+    isEraserActive = true;
+    currentColor = 'white';
+});
 
-        // Flutter에 메시지 보내기
-        function sendMessageToFlutter(message) {
-            if (window.FlutterChannel) {
-                window.FlutterChannel.postMessage(message);
-            } else {
-                console.error('FlutterChannel is not available.');
-            }
-        }
+document.getElementById('save').addEventListener('click', () => {
+    const dataURL = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'drawing.png';
+    link.click();
+});
 
-        // 캔버스에서 작업 후 Flutter로 알림 보내기
-        canvas.addEventListener('click', () => {
-            sendMessageToFlutter('Canvas clicked!');
-        });
-    }
+document.getElementById('export').addEventListener('click', () => {
+    alert('Export 기능 준비 중입니다!');
+});
+
+canvas.addEventListener('mousedown', startPosition);
+canvas.addEventListener('mouseup', endPosition);
+canvas.addEventListener('mousemove', draw);
+
+function startPosition(e) {
+    painting = true;
+    draw(e);
 }
 
-// 초기 DOM 준비가 끝난 후에 'saveCanvas' 함수 실행
-window.addEventListener('DOMContentLoaded', saveCanvas);
+function endPosition() {
+    painting = false;
+    ctx.beginPath();
+}
+
+function draw(e) {
+    if (!painting) return;
+
+    ctx.lineWidth = isEraserActive ? 10 : 2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = isEraserActive ? 'white' : currentColor;
+
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
+}

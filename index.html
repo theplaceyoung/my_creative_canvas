@@ -1,107 +1,37 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Draw it yourself</title>
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
+</head>
+<body>
     <!-- App Bar -->
     <div class="appbar">
-      <h1>Draw it Yourself</h1>
+        <h1>Draw it Yourself</h1>
     </div>
-    
+
     <!-- tool options -->
-    <div class="tools">
-      <button id="black" class="button">검정</button>
-      <button id="red" class="button">빨강</button>
-      <button id="blue" class="button">파랑</button>
-      <button id="yellow" class="button">노랑</button>
-      <button id="eraser" class="button">지우개</button>
-      <button id="save" class="button">저장</button>
-      <button id="export" class="button">내보내기</button>
+    <div class="tools" id="tools">
+        <button id="black" class="button">검정</button>
+        <button id="red" class="button">빨강</button>
+        <button id="blue" class="button">파랑</button>
+        <button id="yellow" class="button">노랑</button>
+        <button id="eraser" class="button">지우개</button>
+        <button id="save" class="button">저장</button>
+        <button id="export" class="button">내보내기</button>
     </div>
 
     <!-- canvas area-->
     <canvas id="drawingCanvas" width="800" height="600"></canvas>
-    
+
     <!-- Footer -->
     <footer class="footer">
-      <p>© 2025 DRAFT</p>
+        <p>© 2025 DRAFT</p>
     </footer>
-  
-  <script>
-    const canvas = document.getElementById('drawingCanvas');
-    const ctx = canvas.getContext('2d');
-  
-    let painting = false;
-    let currentColor = 'black';
-    let isEraserActive = false; // 수정된 변수명
-  
-    function startPosition(e) {
-      painting = true;
-      draw(e);
-    }
-  
-    function endPosition() {
-      painting = false;
-      ctx.beginPath();
-    }
-  
-    function draw(e) {
-      if (!painting) return;
-  
-      ctx.lineWidth = isEraserActive ? 10 : 2;
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = isEraserActive ? 'white' : currentColor;
-  
-      ctx.lineTo(e.offsetX, e.offsetY);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(e.offsetX, e.offsetY);
-    }
-  
-    // 각 버튼 클릭 이벤트 리스너
-    document.getElementById('black').addEventListener('click', () => {
-      isEraserActive = false;
-      currentColor = 'black';
-    });
-  
-    document.getElementById('red').addEventListener('click', () => {
-      currentColor = 'red';
-    });
-  
-    document.getElementById('blue').addEventListener('click', () => {
-      currentColor = 'blue';
-    });
-  
-    document.getElementById('yellow').addEventListener('click', () => {
-      currentColor = 'yellow';
-    });
-  
-    document.getElementById('eraser').addEventListener('click', () => {
-      isEraserActive = true;
-      currentColor = 'white';
-    });
-  
-    document.getElementById('save').addEventListener('click', () => {
-      const dataURL = canvas.toDataURL('image/png');
-      const link = document.createElement('a');
-      link.href = dataURL;
-      link.download = 'drawing.png';
-      link.click();
-    });
-  
-    document.getElementById('export').addEventListener('click', () => {
-      // Export logic here (e.g., save to server or other formats)
-      alert('Export 기능 준비 중입니다!');
-    });
-  
-    canvas.addEventListener('mousedown', startPosition);
-    canvas.addEventListener('mouseup', endPosition);
-    canvas.addEventListener('mousemove', draw);
-  </script>
-  
-  </body>
-  </html>
+
+    <script src="script.js"></script>
+    <script src="drag-and-drop.js"></script> 
+</body>
+</html>
