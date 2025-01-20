@@ -71,7 +71,16 @@ canvas {
     cursor: grabbing;  /* 내부 모든 버튼 및 요소가 드래그 상태에서 손 모양 */
 }
 
+/* Footer 스타일 */
+.footer a {
+    color: white; /* 하이퍼링크 글자 색상 */
+    text-decoration: none; /* 밑줄 제거 */
+}
 
+.footer a:hover {
+    color: #ffcc00; /* 마우스 오버 시 하이라이트 색상 */
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+} 
 
 footer {
     position: fixed; /* 페이지 하단에 고정 */
@@ -80,8 +89,19 @@ footer {
     background-color: black;
     color: white;
     padding: 6px;
-    height: 10px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
+/* Footer tag 'a' */
+.footer a {
+    color: white; /* 하이퍼링크 글자 색상 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+.footer a:hover {
+    color: #ffcc00; /* 마우스 오버 시 하이라이트 색상 */
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+} 

@@ -65,4 +65,5 @@ function draw(e) {
     ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(e.offsetX, e.offsetY);
+
 }
