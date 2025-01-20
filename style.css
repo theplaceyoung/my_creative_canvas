@@ -31,28 +31,44 @@ canvas {
 }
 
 .tools {
-    margin-top: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
     display: flex;
-    justify-content: space-around;
-    /* padding: 10px; */
-    margin-bottom: 10px;
+    justify-content: center;  /* 중앙 정렬 */
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    gap: 10px;
 }
 
 .tools button {
-    margin-right: 5px;
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.toggle-drawing {
+    position: fixed;  /* 고정 위치 */
+    top: 10px;
+    z-index: 100;  /* 화면 위에 있도록 */
+}
+
+/* 추가된 Clear 버튼 스타일 */
+button#clearCanvas {
+    margin-left: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+.clear-canvas {
+    right: 10px;  /* 오른쪽 상단에 배치 */
 }
 
 footer {
-    position: fixed; /* 페이지 하단에 고정 */
-    bottom: 0;
-    width: 100%;
-    background-color: black;
-    color: white;
-    padding: 5px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 50px;
+    background-color: #f1f1f1;
+    text-align: center;
+    line-height: 50px;
+    color: #333;
 }
