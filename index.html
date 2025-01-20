@@ -9,7 +9,7 @@
 <body>
 
 <div class="tools">
-  <button id="pen" class="button">검정</button>
+  <button id="black" class="button">검정</button>
   <button id="red" class="button">빨강</button>
   <button id="blue" class="button">파랑</button>
   <button id="yellow" class="button">노랑</button>
@@ -26,7 +26,7 @@
 
   let painting = false;
   let currentColor = 'black';
-  let usingEraser = false;
+  let isEraserActive = false; // 수정된 변수명
 
   function startPosition(e) {
     painting = true;
@@ -41,9 +41,9 @@
   function draw(e) {
     if (!painting) return;
 
-    ctx.lineWidth = usingEraser ? 10 : 2;
+    ctx.lineWidth = isEraserActive ? 10 : 2;
     ctx.lineCap = 'round';
-    ctx.strokeStyle = usingEraser ? 'white' : currentColor;
+    ctx.strokeStyle = isEraserActive ? 'white' : currentColor;
 
     ctx.lineTo(e.offsetX, e.offsetY);
     ctx.stroke();
@@ -51,8 +51,9 @@
     ctx.moveTo(e.offsetX, e.offsetY);
   }
 
+  // 각 버튼 클릭 이벤트 리스너
   document.getElementById('black').addEventListener('click', () => {
-    usingEraser = false;
+    isEraserActive = false;
     currentColor = 'black';
   });
 
@@ -69,7 +70,7 @@
   });
 
   document.getElementById('eraser').addEventListener('click', () => {
-    usingEraser = true;
+    isEraserActive = true;
     currentColor = 'white';
   });
 

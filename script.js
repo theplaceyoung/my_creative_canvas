@@ -52,24 +52,29 @@ toolsDiv.appendChild(clearButton);
 document.body.insertBefore(toolsDiv, canvas);
 
 
-// flutter로부터 메세지 받기
+// Flutter로부터 메세지 받기
 function saveCanvas() {
     console.log('Save canvas triggered by Flutter');
-    // 캔버스 데이터를 저장하거나 다른 작업을 실행
     const canvas = document.getElementById('myCanvas');
-    const dataURL = canvas.toDataURL('image/png');
-    console.log('Canvas Data URL:', dataURL);
+    if (canvas) {
+        const dataURL = canvas.toDataURL('image/png');
+        console.log('Canvas Data URL:', dataURL);
 
-    // Flutter에 메시지 보내기
-function sendMessageToFlutter(message) {
-    if (window.FlutterChannel) {
-      window.FlutterChannel.postMessage(message);
-    } else {
-      console.error('FlutterChannel is not available.');
+        // Flutter에 메시지 보내기
+        function sendMessageToFlutter(message) {
+            if (window.FlutterChannel) {
+                window.FlutterChannel.postMessage(message);
+            } else {
+                console.error('FlutterChannel is not available.');
+            }
+        }
+
+        // 캔버스에서 작업 후 Flutter로 알림 보내기
+        canvas.addEventListener('click', () => {
+            sendMessageToFlutter('Canvas clicked!');
+        });
     }
 }
 
-// 캔버스에서 작업 후 Flutter로 알림 보내기
-document.getElementById('myCanvas').addEventListener('click', () => {
-    sendMessageToFlutter('Canvas clicked!');
-  }); }
+// 초기 DOM 준비가 끝난 후에 'saveCanvas' 함수 실행
+window.addEventListener('DOMContentLoaded', saveCanvas);

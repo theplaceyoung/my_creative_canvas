@@ -1,0 +1,11 @@
+{
+  "name": "my_creative_canvas",
+  "version": "1.0.0",
+  "main": "index.html",
+  "scripts": {
+    "build": "npm run build"
+  },
+  "dependencies": {
+    "firebase": "^11.2.0"
+  }
+}
