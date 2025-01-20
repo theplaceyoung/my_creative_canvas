@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #d1bbbb;
+}
+canvas {
+    border: 1px solid #ccc;
+    background-color: rgb(241, 232, 232);
+}
+.tools {
+    margin-bottom: 10px;
+}
+.tools button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
