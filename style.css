@@ -15,7 +15,7 @@
 /* 로고 애니메이션 */
 .loading-logo {
     width: 100px; /* 로고 크기 설정 */
-    animation: fadeInOut 1.2s ease-in-out infinite;
+    animation: fadeInOut 1.5s ease-in-out infinite;
 }
 
 /* 로고의 깜빡이는 애니메이션 */
