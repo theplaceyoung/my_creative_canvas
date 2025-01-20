@@ -1,9 +1,30 @@
+window.onload = function() {
+    // 로딩 화면 숨기고 실제 콘텐츠 표시
+    setTimeout(() => {
+        document.getElementById('loadingScreen').style.display = 'none'; // 로딩 화면 숨김
+        document.getElementById('mainContent').style.display = 'block';  // 실제 콘텐츠 표시
+    }, 1000);  // 1초 후 로딩 화면 제거
+};
+
 const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
 
 let painting = false;
 let currentColor = 'black';
 let isEraserActive = false;
+
+// 캔버스 크기를 윈도우 크기에 맞추는 함수
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight - 100; // 헤더와 푸터를 제외한 화면 크기
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // 크기 변경 시 기존 캔버스 내용 초기화
+}
+
+// 윈도우 크기 변경 시 캔버스 크기 조정
+window.addEventListener('resize', resizeCanvas);
+
+// 페이지 로드 시 캔버스 크기 초기화
+resizeCanvas();
 
 // 각 버튼 클릭 이벤트 리스너
 document.getElementById('black').addEventListener('click', () => {

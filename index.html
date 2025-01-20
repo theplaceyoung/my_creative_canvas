@@ -11,32 +11,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- App Bar -->
-    <div class="appbar">
-        <h1>Draw it Yourself</h1>
+    <!-- loading screen -->
+    <div id="loadingScreen" class="loading-screen">
+    <img src="icons/loading_icon-100x100.png" alt="로고" class="loading-logo">
+</div>
+
+    <!-- 실제 페이지 내용 -->
+    <div id="mainContent" style="display: none;">
+        <!-- App Bar -->
+        <div class="appbar">
+            <h1>Draw it Yourself</h1>
+        </div>
+
+        <!-- tool options -->
+        <div class="tools" id="tools">
+            <button id="black" class="button">검정</button>
+            <button id="red" class="button">빨강</button>
+            <button id="blue" class="button">파랑</button>
+            <button id="yellow" class="button">노랑</button>
+            <button id="eraser" class="button">지우개</button>
+            <button id="save" class="button">저장</button>
+            <button id="export" class="button">내보내기</button>
+        </div>
+
+        <!-- canvas area-->
+        <canvas id="drawingCanvas" width="800" height="600"></canvas>
+
+        <!-- Footer -->
+        <footer class="footer">
+        <p style="line-height: 1.8;">
+            © 2025 DRAFT <span style="margin: 0 10px;">|</span>
+            <a href="theplaceyoung@gmail.com">theplaceyoung@gmail.com</a>
+        </p>
+        </footer>
     </div>
-
-    <!-- tool options -->
-    <div class="tools" id="tools">
-        <button id="black" class="button">검정</button>
-        <button id="red" class="button">빨강</button>
-        <button id="blue" class="button">파랑</button>
-        <button id="yellow" class="button">노랑</button>
-        <button id="eraser" class="button">지우개</button>
-        <button id="save" class="button">저장</button>
-        <button id="export" class="button">내보내기</button>
-    </div>
-
-    <!-- canvas area-->
-    <canvas id="drawingCanvas" width="800" height="600"></canvas>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <p style="line-height: 1.8;">
-        © 2025 DRAFT <span style="margin: 0 10px;">|</span>
-          <a href="theplaceyoung@gmail.com">theplaceyoung@gmail.com</a>
-      </p>
-    </footer>
 
     <script src="script.js"></script>
     <script src="drag-and-drop.js"></script> 
