@@ -9,16 +9,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* 로딩 화면이 다른 콘텐츠 위에 오도록 */
+    z-index: 9999;
 }
 
-/* 로고 애니메이션 */
 .loading-logo {
-    width: 100px; /* 로고 크기 설정 */
+    width: 100px;
     animation: fadeInOut 1.5s ease-in-out infinite;
 }
 
-/* 로고의 깜빡이는 애니메이션 */
 @keyframes fadeInOut {
     0% {
         opacity: 0;
@@ -31,74 +29,162 @@
     }
 }
 
-/* 기본 설정: 전체 화면을 채우도록 */
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;  /* 전체 화면 크기 */
+    height: 100%;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
     display: flex;
-    flex-direction: column;  /* 세로로 배치 */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
 }
 
-/* 앱바 설정 */
+/* 앱바 스타일 */
 .appbar {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 60px;
+    height: 40px;
     background-color: #3757e5;
     color: white;
+    padding: 15px;
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
     font-size: 24px;
     font-weight: bold;
-    z-index: 100; /* 앱바가 콘텐츠 위에 오도록 */
+    z-index: 100;
 }
 
-/* 실제 페이지 내용 */
+/* 메인 콘텐츠 */
 #mainContent {
-    margin-top: 60px; /* 앱바 높이만큼 여백 추가 */
-    flex-grow: 1; /* 콘텐츠 영역이 남은 공간을 차지하도록 */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    height: 100vh;
+}
+
+/* 메뉴바 설정 */
+#menuBar {
+    position: absolute;
+    /* padding: 10px; */
+    top: 80px; /* 앱바 아래로 위치 */
+    left: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    z-index: 90;
+}
+#menuBar button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;  /* 기본 커서 */
     position: relative;
 }
 
-/* 툴 박스 설정 */
-.tools {
-    position: absolute;  /* 캔버스 위에 위치 */
-    top: 80px;  /* 앱바 아래쪽으로 위치 */
-    left: 10px;
+/* 드래그 앤 드롭 툴박스 설정 */
+#toolbox {
+    position: absolute;
+    top: 150px;  /* 화면 상단에서 20px 떨어진 위치 */
+    left: 30px;  /* 화면 좌측에서 20px 떨어진 위치 */
+    z-index: 10;  /* 다른 요소들 위에 표시되도록 설정 */
     background-color: white;
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
+    flex-direction: column;
     gap: 10px;
-    z-index: 200;  /* 캔버스보다 위에 표시 */
-}
-
-/* 버튼 스타일 */
-.tools button {
-    padding: 5px 10px;
-    font-size: 14px;
-    cursor: pointer;
-    z-index: 1;
 }
 
 /* 캔버스 설정 */
-canvas {
-    width: 100%;
-    height: calc(100vh - 100px);  /* 앱바와 푸터를 제외한 공간을 채우도록 */
-    margin-bottom: 40px;  /* 푸터와 겹치지 않도록 여백 추가 */
+#drawingCanvas {
     border: 1px solid grey;
-    background-color: transparent;
+    margin-top: 130px;
+    width: 100%;
+    height: calc(100vh - 120px); /* 앱바, 메뉴바 제외한 높이 */
+    margin-bottom: 40px;
+}
+/* 캔버스 크기 설정 메뉴 */
+#canvasSizeMenu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+#canvasSizeMenu input {
+    width: 100px;
+    margin: 5px;
+}
+#canvasSizeMenu button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+/* 버튼 스타일 */
+button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;  /* 기본 커서 */
+    position: relative;
+    z-index: 1;  /* 상위 레벨로 배치 */
+}
+
+.button:active {
+    cursor: grabbing;  /* 드래그 상태에서 손 모양 */
+}
+
+.button:hover {
+    background-color: #3757e5;  /* hover 상태에서 배경 색상 */
+}
+
+/* 툴박스 드래그 기능을 위한 스타일 */
+.draggable {
+    cursor: grabbing; /*move;*/
+}
+/* Style for the select dropdown */
+#fileTypeSelect {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Style for the export button */
+#exportBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Style for the export button on hover */
+#exportBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Optional: Style for the container (e.g., center the elements) */
+#fileTypeSelect, #exportBtn {
+    display: inline-block;
+    margin: 10px;
 }
 
 /* 푸터 설정 */
@@ -114,10 +200,9 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 50;  /* 푸터가 맨 아래에 위치하도록 */
+    z-index: 50;
 }
 
-/* 푸터 링크 스타일 */
 .footer a {
     color: white;
     text-decoration: none;

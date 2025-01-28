@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "my-creative-canvas"
-  }
+    "default": "my-canvas-canvas"
+  },
+  "targets": {},
+  "etags": {}
 }

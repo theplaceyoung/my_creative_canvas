@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  stats: {children: true},
   mode: 'production',
   entry: './src/index.js',  // Entry
   output: {
@@ -27,6 +28,7 @@ module.exports = {
         },
       },
     ]
+    
   },
   resolve: {
     extensions: ['.js', '.json'],  // 파일 확장자 처리

@@ -9,70 +9,77 @@
     <link rel="icon" sizes="48x48" href="icons/icon-48x48.png">
     <title>Draw it yourself</title>
     <link rel="stylesheet" href="src/style.css">
-
-    <!-- Insert firebase SDK -->
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-          apiKey: "AIzaSyAMOV_8ViB4F9tLVAb0J8_7JmPVczuAuMs",
-          authDomain: "my-canvas-canvas.firebaseapp.com",
-          projectId: "my-canvas-canvas",
-          storageBucket: "my-canvas-canvas.firebasestorage.app",
-          messagingSenderId: "282648429603",
-          appId: "1:282648429603:web:06d579b4b9dc157f76dd96",
-          measurementId: "G-DCHJ00MPVN"
-        };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-    </script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js"></script>
 </head>
 <body>
     <!-- loading screen -->
     <div id="loadingScreen" class="loading-screen">
-    <img src="icons/loading_icon-100x100.png" alt="로고" class="loading-logo">
-</div>
-
-    <!-- 실제 페이지 내용 -->
-    <div id="mainContent" style="display: none;">
-        <!-- App Bar -->
-        <div class="appbar">
-            <h1>Draw it Yourself</h1>
-        </div>
-
-        <!-- tool options -->
-        <div class="tools" id="tools">
-            <button id="black" class="button">검정</button>
-            <button id="red" class="button">빨강</button>
-            <button id="blue" class="button">파랑</button>
-            <button id="yellow" class="button">노랑</button>
-            <button id="eraser" class="button">지우개</button>
-            <button id="save" class="button">저장</button>
-            <button id="export" class="button">내보내기</button>
-        </div>
-
-        <!-- canvas area-->
-        <canvas id="drawingCanvas" width="800" height="600"></canvas>
-
-        <!-- Footer -->
-        <footer class="footer">
-        <p style="line-height: 1.8;">
-            © 2025 DRAFT <span style="margin: 0 10px;">|</span>
-            <a href="theplaceyoung@gmail.com">theplaceyoung@gmail.com</a>
-        </p>
-        </footer>
+        <img src="icons/loading_icon-100x100.png" alt="로고" class="loading-logo">
+        <div>\n Loading...</div>
     </div>
 
+    <!-- App Bar -->
+    <div class="appbar">
+        <h1>Draw it Yourself</h1>
+    </div>
+
+    <!-- 메인 콘텐츠 (숨김 상태로 시작) -->
+    <div id="mainContent" style="display:none;">
+        <!-- 메뉴바 -->
+        <div id="menuBar">
+            <!-- 캔버스 크기 설정 -->
+            <button id="openCanvasSizeMenu">Set Canvas Size</button>
+            <button id="save">Save</button>
+            <button id="export">Export</button>
+        </div>
+
+        <!-- 드래그 앤 드롭 툴박스 -->
+        <div id="toolbox" class="draggable">
+            <!-- 색상 선택 버튼들 -->
+            <button id="black">Black</button>
+            <button id="red">Red</button>
+            <button id="blue">Blue</button>
+            <button id="yellow">Yellow</button>
+            <button id="eraser">Eraser</button>
+        </div>
+
+        <!-- 캔버스 크기 설정 메뉴 (숨겨져 있음) -->
+        <div id="canvasSizeMenu" style="display: none;">
+            <label for="canvasWidth">Width: </label>
+            <input type="number" id="canvasWidth" min="100" max="1200" value="1200">
+            <label for="canvasHeight">Height: </label>
+            <input type="number" id="canvasHeight" min="100" max="800" value="800">
+            <button id="applyCanvasSize">Apply Size</button>
+            <button id="closeCanvasSizeMenu">Close</button>
+        </div>
+
+        <!-- 캔버스 -->
+        <canvas id="drawingCanvas" width="1200" height="800" style="width: 1200px; height: 800px;"></canvas>
+    </div>
+
+    <!-- 파일 형식 선택 및 export  -->
+    <select id="fileTypeSelect">
+        <option value="png">PNG</option>
+        <option value="jpeg">JPG</option>
+        <option value="pdf">PDF</option>
+    </select>
+    <button id="exportBtn" style="display:none;">Export</button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p style="line-height: 1.8;">
+            © 2025 DRAFT <span style="margin: 0 10px;">|</span>
+            <a href="mailto:theplaceyoung@gmail.com">theplaceyoung@gmail.com</a>
+        </p>
+    </footer>
+
+    <!-- 스크립트들 -->
     <script src="src/script.js"></script>
-    <script src="src/drag-and-drop.js"></script> 
-   
+    <script src="src/drag-and-drop.js"></script>
+    <script src="src/export.js"></script>
+
+    <!-- jsPDF 라이브러리 추가 (CDN 사용) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
