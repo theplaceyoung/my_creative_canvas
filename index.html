@@ -4,11 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="icons/favicon.ico" type="image/x-icon"> <!-- Favicon 링크 -->
-    <link rel="icon" sizes="16x16" href="icons/favicon-16x16.png">
-    <link rel="icon" sizes="32x32" href="icons/favicon-32x32.png">
-    <link rel="icon" sizes="48x48" href="icons/favicon-48x48.png">
+    <link rel="icon" sizes="16x16" href="icons/icon-16x16.png">
+    <link rel="icon" sizes="32x32" href="icons/icon-32x32.png">
+    <link rel="icon" sizes="48x48" href="icons/icon-48x48.png">
     <title>Draw it yourself</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="src/style.css">
+
+    <!-- Insert firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyAMOV_8ViB4F9tLVAb0J8_7JmPVczuAuMs",
+          authDomain: "my-canvas-canvas.firebaseapp.com",
+          projectId: "my-canvas-canvas",
+          storageBucket: "my-canvas-canvas.firebasestorage.app",
+          messagingSenderId: "282648429603",
+          appId: "1:282648429603:web:06d579b4b9dc157f76dd96",
+          measurementId: "G-DCHJ00MPVN"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
 </head>
 <body>
     <!-- loading screen -->
@@ -46,8 +71,8 @@
         </footer>
     </div>
 
-    <script src="script.js"></script>
-    <script src="drag-and-drop.js"></script> 
+    <script src="src/script.js"></script>
+    <script src="src/drag-and-drop.js"></script> 
    
 </body>
 </html>
